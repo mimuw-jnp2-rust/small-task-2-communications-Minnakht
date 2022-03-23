@@ -145,9 +145,8 @@ impl Client {
     fn count_closed(&self) -> usize {
         let mut counter: usize = 0;
         for (_, con) in self.connections.iter() {
-            match con {
-                Connection::Closed => counter += 1,
-                _ => {}
+            if let Connection::Closed = con {
+                counter += 1
             }
         }
         counter
